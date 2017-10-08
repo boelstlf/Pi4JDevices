@@ -5,7 +5,7 @@ package net.boelstlf.raspi.pi4jdevices.test;
 
 import java.util.List;
 
-import net.boelstlf.raspi.pi4jdevices.LEDMatrix8x8;
+import net.boelstlf.raspi.pi4jdevices.i2c.LEDMatrix8x8;
 import net.boelstlf.raspi.pi4jdevices.onewire.DS1820;
 
 /**

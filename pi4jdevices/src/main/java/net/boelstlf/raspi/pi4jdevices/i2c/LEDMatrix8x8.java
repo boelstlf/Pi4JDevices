@@ -2,7 +2,7 @@
  * Based on Adafruit's python code for HT16KT33 I2C controller
  * Refer to https://github.com/adafruit/micropython-adafruit-ht16k33.git
  */
-package net.boelstlf.raspi.pi4jdevices;
+package net.boelstlf.raspi.pi4jdevices.i2c;
 
 import java.io.IOException;
 
