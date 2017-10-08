@@ -10,6 +10,8 @@ import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
 
 import net.boelstlf.raspi.pi4jdevices.i2c.LEDMatrix8x8;
 import net.boelstlf.raspi.pi4jdevices.onewire.DS1820;
+import net.boelstlf.raspi.pi4jdevices.gpio.LED;
+import net.boelstlf.raspi.pi4jdevices.i2c.MPL115A2;
 import net.boelstlf.raspi.pi4jdevices.i2c.SSD1306_I2C_Display;
 
 /**
@@ -43,6 +45,10 @@ public class SimpleTest {
 			SimpleTest.testDS1820();
 		} else if (args[0].equalsIgnoreCase("SSD1306")) {
 			SimpleTest.testSSD1306_I2C(Integer.parseInt(args[1]));
+		} else if (args[0].equalsIgnoreCase("MPL115A2")) {
+			SimpleTest.testMPL115A2(Integer.parseInt(args[1]));
+		} else if (args[0].equalsIgnoreCase("LED")) {
+			SimpleTest.testLED(Integer.parseInt(args[1]));
 		}
 	}
 
@@ -57,8 +63,38 @@ public class SimpleTest {
 		System.out.println("\t[0x70] LEDMatrix");
 		System.out.println("\t[0x70] LEDMatrix <posX> <posY>");
 		System.out.println("\t[0x3C] SSD1306 <number of Hello>");
+		System.out.println("\t[0x60] MPL115A2 <number measures>");
 		System.out.println(" One Wire");
 		System.out.println("\tDS1820");
+		System.out.println(" GPIO");
+		System.out.println("\tLED <pin>");
+	}
+	/**
+	 * @param parseInt
+	 */
+	private static void testLED(int pin) {
+		new LED(pin);
+
+	}
+	
+	/**
+	 * @param count
+	 *            number of readings
+	 */
+	private static void testMPL115A2(int count) {
+		System.out.println("Test run for 'MPL115A2' sensor");
+
+		MPL115A2 test = new MPL115A2(0x60);
+
+		for (int i = 0; i < count; i++) {
+			System.out.println("values: " + test.readTP());
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private static void testSSD1306_I2C(int count) {
