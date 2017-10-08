@@ -10,15 +10,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 import java.io.IOException;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
-import com.pi4j.io.gpio.Pin;
-import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.i2c.I2CBus;
+import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 import com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException;
-import com.pi4j.wiringpi.I2C;
+//import com.pi4j.wiringpi.I2C;
 
 /**
  * @author boelstlf
@@ -30,9 +26,8 @@ public class SSD1306_I2C_Display {
 	protected BufferedImage img;
 	protected Graphics2D graphics;
 	private int width, height, pages;
-	private boolean hasRst;
-	private GpioPinDigitalOutput rstPin;
-	private int fd;
+	private I2CDevice device;
+
 	private byte[] buffer;
 	public final static int NUM_ROWS = 5;
 	private String[] rows = new String[NUM_ROWS];
@@ -62,62 +57,40 @@ public class SSD1306_I2C_Display {
 	 * @throws IOException
 	 *             Thrown if the bus can't return device for specified address
 	 */
-	public SSD1306_I2C_Display(int width, int height, GpioController gpio, I2CBus i2c, int address, Pin rstPin)
-			throws IOException {
+	public SSD1306_I2C_Display(int width, int height, int address) {
 		this.width = width;
 		this.height = height;
 		this.pages = (height / 8);
 		this.buffer = new byte[width * this.pages];
 
-		if (rstPin != null) {
-			this.rstPin = gpio.provisionDigitalOutputPin(rstPin);
-			this.hasRst = true;
-		} else {
-			this.hasRst = false;
-		}
-
 		this.img = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
 		this.graphics = this.img.createGraphics();
 
-		this.fd = I2C.wiringPiI2CSetup(address);
-		if (this.fd == -1) {
-			throw new IOException("Unable to open device at address: " + address);
+		// get the device at I2C address
+		try {
+			I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1);
+
+			device = bus.getDevice(address);
+			System.out.println("Connected to device ok!");
+
+			this.begin();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedBusNumberException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		this.begin();
 		// init the rows buffer
-		for(int i=0; i< rows.length; i++)
-		{
+		for (int i = 0; i < rows.length; i++) {
 			rows[i] = "";
 		}
 
 		System.out.println("Instance of SSD1306 created");
 	}
 
-	/**
-	 * Display object using I2C communication without a reset pin
-	 *
-	 * @param width
-	 *            Display width
-	 * @param height
-	 *            Display height
-	 * @param gpio
-	 *            GPIO object
-	 * @param i2c
-	 *            I2C object
-	 * @param address
-	 *            Display address
-	 * @see SSD1306_I2C_Display#Display(int, int, GpioController, I2CBus, int,
-	 *      Pin) Using this constructor with null Pin
-	 * @see GpioFactory#getInstance() GpioController instance factory
-	 * @see com.pi4j.io.i2c.I2CFactory#getInstance(int) I2C bus factory
-	 */
-	public SSD1306_I2C_Display(int width, int height, GpioController gpio, I2CBus i2c, int address) throws IOException {
-		this(width, height, gpio, i2c, address, null);
-	}
-
-	public SSD1306_I2C_Display(int address) throws IOException, UnsupportedBusNumberException {
-		this(SSD1306_I2C_Display.LCD_WIDTH_128, SSD1306_I2C_Display.LCD_HEIGHT_64, GpioFactory.getInstance(),
-				I2CFactory.getInstance(I2C.CHANNEL_1), address, RaspiPin.getPinByName("GPIO 2"));
+	public SSD1306_I2C_Display(int address) {
+		this(SSD1306_I2C_Display.LCD_WIDTH_128, SSD1306_I2C_Display.LCD_HEIGHT_64, address);
 	}
 
 	private void initDisplay() throws IOException {
@@ -231,28 +204,11 @@ public class SSD1306_I2C_Display {
 	 */
 	public void begin(int vccState) throws IOException {
 		this.vccState = vccState;
-		this.reset();
+
 		this.initDisplay();
 		this.command(SSD1306_DISPLAYON);
 		this.clear();
 		this.display();
-	}
-
-	/**
-	 * Pulls reset pin high and low and resets the display
-	 */
-	public void reset() {
-		if (this.hasRst) {
-			try {
-				this.rstPin.setState(true);
-				Thread.sleep(1);
-				this.rstPin.setState(false);
-				Thread.sleep(10);
-				this.rstPin.setState(true);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/**
@@ -540,9 +496,7 @@ public class SSD1306_I2C_Display {
 			for (int i = 0; i < rows.length; i++)
 				setString(i + 1, 1, rows[i]);
 			displayImage();
-		}
-		else
-		{
+		} else {
 			System.out.println("row not between 1 and 4; row is given as '" + row + "'");
 		}
 	}
@@ -556,7 +510,13 @@ public class SSD1306_I2C_Display {
 
 	private void i2cWrite(int register, int value) {
 		value &= 0xFF;
-		I2C.wiringPiI2CWriteReg8(this.fd, register, value);
+
+		try {
+			device.write(register, (byte) value);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static final short SSD1306_I2C_ADDRESS = 0x3C;
