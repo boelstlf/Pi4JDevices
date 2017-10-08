@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Pi4JDevices create runnable Jar">
+    <!--this file was created by Eclipse Runnable JAR file Export Wizard-->
+    <!--ANT 1.7 is required-->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="${dir.buildfile}/.."/>
+    <property name="dir.jarfile" value="${dir.buildfile}"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/Pi4JDevices.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="net.boelstlf.raspi.pi4jdevices.test.SimpleTest"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ testng-6.9.9.jar junit-4.10.jar hamcrest-core-1.1.jar jcommander-1.48.jar ant-1.7.0.jar ant-launcher-1.7.0.jar snakeyaml-1.15.jar bsh-2.0b4.jar pi4j-core-1.1.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="${dir.jarfile}/target/test-classes"/>
+            <fileset dir="${dir.jarfile}/target/classes"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/org/testng/testng/6.9.9" includes="testng-6.9.9.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/junit/junit/4.10" includes="junit-4.10.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/org/hamcrest/hamcrest-core/1.1" includes="hamcrest-core-1.1.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/com/beust/jcommander/1.48" includes="jcommander-1.48.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/org/apache/ant/ant/1.7.0" includes="ant-1.7.0.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/org/apache/ant/ant-launcher/1.7.0" includes="ant-launcher-1.7.0.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/org/yaml/snakeyaml/1.15" includes="snakeyaml-1.15.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/org/beanshell/bsh/2.0b4" includes="bsh-2.0b4.jar"/>
+            <zipfileset dir="/Users/boelstlf/.m2/repository/com/pi4j/pi4j-core/1.1" includes="pi4j-core-1.1.jar"/>
+        </jar>
+    </target>
+</project>
