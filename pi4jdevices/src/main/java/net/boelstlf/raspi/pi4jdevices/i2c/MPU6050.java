@@ -53,8 +53,7 @@ public class MPU6050 {
 
 			// get the device ADS1015 on 0x48
 			device = bus.getDevice(hwadd);
-			System.out.println("Connected to device on hwadd '" + hwadd
-					+ "' ok!");
+			System.out.println("Connected to device on hwadd '" + hwadd + "' ok!");
 
 			result = device.read(MPU6050_WHO_AM_I);
 			System.out.println("WHO_AM_I: " + result);
@@ -99,9 +98,9 @@ public class MPU6050 {
 			if (error < 6)
 				System.out.println("Could not read all data");
 			else {
-				ret.x_accel = asInt(accelData[0]) * 256 + asInt(accelData[1]);
-				ret.y_accel = asInt(accelData[2]) * 256 + asInt(accelData[3]);
-				ret.z_accel = asInt(accelData[4]) * 256 + asInt(accelData[5]);
+				ret.x_accel = get2C(asInt(accelData[0]) * 256 + asInt(accelData[1]));
+				ret.y_accel = get2C(asInt(accelData[2]) * 256 + asInt(accelData[3]));
+				ret.z_accel = get2C(asInt(accelData[4]) * 256 + asInt(accelData[5]));
 			}
 
 			// read 3D gyro data
@@ -110,9 +109,9 @@ public class MPU6050 {
 
 				System.out.println("Could not read all data");
 			else {
-				ret.x_gyro = asInt(gyroData[0]) * 256 + asInt(gyroData[1]);
-				ret.y_gyro = asInt(gyroData[2]) * 256 + asInt(gyroData[3]);
-				ret.z_gyro = asInt(gyroData[4]) * 256 + asInt(gyroData[5]);
+				ret.x_gyro = get2C(asInt(gyroData[0]) * 256 + asInt(gyroData[1]));
+				ret.y_gyro = get2C(asInt(gyroData[2]) * 256 + asInt(gyroData[3]));
+				ret.z_gyro = get2C(asInt(gyroData[4]) * 256 + asInt(gyroData[5]));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -135,6 +134,14 @@ public class MPU6050 {
 		}
 		return i;
 	}
+	
+	private int get2C(int val)
+	{
+		if(val>0x8000)
+			val=-((65535 - val) + 1);
+		return val;
+
+	}
 
 	/**
 	 * Inner class for 3D return value, x, y, z on acceleration and gyro.
@@ -144,6 +151,8 @@ public class MPU6050 {
 	 */
 	public static class ThreeAxisAndGyro {
 
+		private static final double ACCELSCALE = 16384.0;
+		private static final double GYROSCALE = 131.0;
 		public int x_accel = -1;
 		public int y_accel = -1;
 		public int z_accel = -1;
@@ -151,18 +160,55 @@ public class MPU6050 {
 		public int y_gyro = -1;
 		public int z_gyro = -1;
 
+		private double dist(double a, double b) {
+			return Math.sqrt((a * a) + (b * b));
+		}
+
+		public double getYRotation() {
+			double radians = Math.atan2(x_accel_scaled(), dist(y_accel_scaled(), z_accel_scaled()));
+			return -Math.toDegrees(radians);
+		}
+
+		public double getXRotation() {
+			double radians = Math.atan2(y_accel_scaled(), dist(x_accel_scaled(), z_accel_scaled()));
+			return Math.toDegrees(radians);
+		}
+
+		public double x_accel_scaled() {
+			return x_accel / ACCELSCALE;
+		}
+
+		public double y_accel_scaled() {
+			return y_accel / ACCELSCALE;
+		}
+
+		public double z_accel_scaled() {
+			return z_accel / ACCELSCALE;
+		}
+
+		public double x_gyro_scaled() {
+			return (double) (x_gyro / GYROSCALE);
+		}
+
+		public double y_gyro_scaled() {
+			return (double) (y_gyro / GYROSCALE);
+		}
+
+		public double z_gyro_scaled() {
+			return (double) (z_gyro / GYROSCALE);
+		}
+
 		/*
 		 * (non-Javadoc)
 		 * 
 		 * @see java.lang.Object#toString()
 		 */
 		public String toString() {
+
 			String msg;
-			msg = "accel --> ";
-			msg += "x: " + x_accel + "  \ty: " + y_accel + "  \tz: " + z_accel;
-			msg += "\t\t";
-			msg += "gyro  --> ";
-			msg += "x: " + x_gyro + "  \ty: " + y_gyro + "  \tz: " + z_gyro;
+			msg = String.format("xRot: %10.3f \tyRot: %10.3f ", getXRotation(), getYRotation());
+			msg += String.format("\tgyroX: %10.3f \tgyroY: %10.3f \tgyroZ: %10.3f", x_gyro_scaled(), y_gyro_scaled(), z_gyro_scaled());
+			msg += String.format("\tacclX: %10.3f \tacclY: %10.3f \tacclZ: %10.3f", x_accel_scaled(), y_accel_scaled(), z_accel_scaled());
 			return msg;
 		}
 	}

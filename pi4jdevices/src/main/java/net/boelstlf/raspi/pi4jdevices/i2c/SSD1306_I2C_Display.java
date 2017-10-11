@@ -486,7 +486,7 @@ public class SSD1306_I2C_Display {
 	 * 
 	 * @param data
 	 * @param row
-	 *            between 1..4
+	 *            between 1..NUM_ROWS
 	 */
 	public void setString(int row, String message) {
 		if (row > 0 && row <= NUM_ROWS) {
@@ -497,7 +497,7 @@ public class SSD1306_I2C_Display {
 				setString(i + 1, 1, rows[i]);
 			displayImage();
 		} else {
-			System.out.println("row not between 1 and 4; row is given as '" + row + "'");
+			System.out.println("row not between 1 and " + NUM_ROWS + "; row is given as '" + row + "'");
 		}
 	}
 

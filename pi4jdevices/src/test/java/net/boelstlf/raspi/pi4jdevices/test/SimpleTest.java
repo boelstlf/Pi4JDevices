@@ -77,7 +77,7 @@ public class SimpleTest {
 		System.out.println(" GPIO");
 		System.out.println("\tLED <pin>");
 	}
-	
+
 	/**
 	 * Simple test to get values from the proximity sensor.
 	 * 
@@ -106,7 +106,7 @@ public class SimpleTest {
 		}
 
 	}
-	
+
 	/**
 	 * @param count
 	 *            number of readings
@@ -114,16 +114,19 @@ public class SimpleTest {
 	private static void testMPU6050(int count) {
 		System.out.println("Test run on 3-axis-gyro sensor 'MPU-6050'");
 
-		MPU6050 test = new MPU6050(104);
+		MPU6050 test = new MPU6050(0x68);
 		SSD1306_I2C_Display display = new SSD1306_I2C_Display(0x3c);
 		display.clearImage();
 
 		for (int i = 0; i < count; i++) {
 			ThreeAxisAndGyro accl = test.readAccl();
 			System.out.println("" + accl);
-			display.setString(2, "x_accl: '" + accl.x_accel + "'");
-			display.setString(3, "y_accl: '" + accl.y_accel + "'");
-			display.setString(4, "z_accl: '" + accl.z_accel + "'");
+			display.clearImage();
+			display.setString(1, 1, "x_rot: '" + accl.getXRotation() + "'");
+			display.setString(2, 1, "y_rot: '" + accl.getYRotation() + "'");
+			display.setString(3, 1, "x_accl: '" + accl.x_accel_scaled() + "'");
+			display.setString(4, 1, "y_accl: '" + accl.y_accel_scaled() + "'");
+			display.setString(5, 1, "z_accl: '" + accl.z_accel_scaled() + "'");
 			display.displayImage();
 
 			try {
