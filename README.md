@@ -12,5 +12,6 @@ I2C - Devices
   * SSD1306     (OLED display)
   * LCD         (2x20 character LCD display)
   * LED Matrix  (8x8 LED matrix)
+  
 UART (serial connection)
   * RFID        (RFID reading based on serial communication)
