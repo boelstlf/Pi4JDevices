@@ -1,3 +1,7 @@
+/**
+ * Based on Adafruit's python code.
+ * Refer to https://github.com/adafruit/
+ */
 package net.boelstlf.raspi.pi4jdevices.i2c;
 
 import java.io.IOException;
