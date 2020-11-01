@@ -29,6 +29,12 @@ Open a terminal on the raspi and enter
 The output will look something like this
 > Raspberry Pi 3 Model B Rev 1.2
 
+An easire way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
+and to run the command
+> pinout
+which will return hardware model and the current pin states and layout at one
+(resources/pinlayout_sample.png)
+
 ## Setup steps after raw image
 
 ## Pin Layout
