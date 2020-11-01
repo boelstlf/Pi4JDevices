@@ -38,7 +38,7 @@ pinout
 ```
 which will return the hardware model and the current pin states and layout in one step
 
-<img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
+<img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="200"/>
 
 ```
 Maximum Current !
@@ -54,7 +54,7 @@ After first boot up do the following Initial configuration of RaspberryPi
 sudo raspi-config
 ```
 
-<img src="./resources/raspi-config_menu.png" alt="raspi-config menu" width="250"/>
+<img src="./resources/raspi-config_menu.png" alt="raspi-config menu" width="400"/>
 
 Open point 'Interface Options', and enable the following interfaces
 *	SSH login
@@ -104,13 +104,13 @@ Basic Calculation based on the picture below:
 * RED LED voltage UF= 1.2 V
   * Resistant voltage Urv = 2.1 V at 4.4mA -> 470 Ohm
 
-<img src="./resources/LED_calc.png" alt="calc LED resistant" width="250"/>
+<img src="./resources/LED_calc.png" alt="calc LED resistant" width="200"/>
 
 The following picture shows how to wire the three LEDs to run the LED-test of the library
 ```
 sudo java -jar Pi4JDevices.jar LED 1
 ```
-<img src="./resources/fritzing_LED.png" alt="fritzing LED" width="250"/>
+<img src="./resources/fritzing_LED.png" alt="fritzing LED" width="350"/>
 
 ### Switch
 ### RFID
