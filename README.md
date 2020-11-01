@@ -37,6 +37,7 @@ and run the command
 pinout
 ```
 which will return the hardware model and the current pin states and layout in one step
+
 <img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
 
 ### Setup steps after raw image installation
@@ -61,23 +62,29 @@ Also, it is recommended to change the default password for the user “pi”, as
 #### Install required software and libraries
 
 __Install Java__
-> sudo apt-get install openjdk-11-jdk
-
+```
+sudo apt-get install openjdk-11-jdk
+```
 __WiringPi__
-> sudo apt-get install wiringpi
-
+```
+sudo apt-get install wiringpi
+```
 __Python package Manager__
-> sudo apt-get install python-pip
-
+```
+sudo apt-get install python-pip
+```
 __Python package for “Serial” installieren__
->sudo pip install pyserial
-
+```
+sudo pip install pyserial
+```
 __MQTT Client__
-> sudo apt-get install -y mosquitto mosquitto-clients
-
+```
+sudo apt-get install -y mosquitto mosquitto-clients
+```
 __MQTT Python libraries__
-> sudo pip install paho-mqtt
-
+```
+sudo pip install paho-mqtt
+```
 ## Usage
 ### LED
 
