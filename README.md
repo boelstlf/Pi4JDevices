@@ -54,7 +54,7 @@ After first boot up do the following Initial configuration of RaspberryPi
 sudo raspi-config
 ```
 
-<img src="./resources/raspi-config_menu.png" alt="raspi-config menu" width="400"/>
+<img src="./resources/raspi-config_menu.png" alt="raspi-config menu" width="500"/>
 
 Open point 'Interface Options', and enable the following interfaces
 *	SSH login
@@ -110,7 +110,7 @@ The following picture shows how to wire the three LEDs to run the LED-test of th
 ```
 sudo java -jar Pi4JDevices.jar LED 1
 ```
-<img src="./resources/fritzing_LED.png" alt="fritzing LED" width="350"/>
+<img src="./resources/fritzing_LED.png" alt="fritzing LED" width="550"/>
 
 ### Switch
 ### RFID
