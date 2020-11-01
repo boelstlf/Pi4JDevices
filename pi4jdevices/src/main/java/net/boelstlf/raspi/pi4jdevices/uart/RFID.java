@@ -100,7 +100,7 @@ public class RFID extends Thread {
 		try {
 			// open the default serial port provided on the GPIO header
 			// - Attempt to open the COM port
-			serial.open("/dev/ttyAMA0", 9600);
+			serial.open("/dev/serial0", 9600);
 
 			while(reading)
 			{		// - When you are done, ensure you close the port
