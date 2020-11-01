@@ -2,7 +2,6 @@
 Java Library to use several sensors/actors for RaspberryPi based on [Pi4J framework](https://pi4j.com/1.2/index.html).
 
 Following devices (sensors & actors) are included currently
-
 * I2C - Devices
   * VCNL4000    (proximity sensor)
   * ADS10x15    (4-channel analog -> digital converter)
@@ -12,10 +11,8 @@ Following devices (sensors & actors) are included currently
   * SSD1306     (OLED display)
   * LCD         (2x20 character LCD display)
   * LED Matrix  (8x8 LED matrix)
-  
 * UART (serial connection)
   * RFID        (RFID reading based on serial communication)
-  
 * GPIO
   * Turn on/off LED (pin-number)
   * Switch      (input pin-number)
@@ -29,11 +26,10 @@ Open a terminal on the raspi and enter
 The output will look something like this
 > Raspberry Pi 3 Model B Rev 1.2
 
-## #Pin Layout
-As identified above I am running this code on a Raspi model 3, thus the following pin layout applies.
+Refer to (https://pinout.xyz/) to get the corresponding pin layout.
 
-
-An easier way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
+### Pin Layout
+An direct way way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
 and run the command
 > pinout
 which will return the hardware model and the current pin states and layout in one step
