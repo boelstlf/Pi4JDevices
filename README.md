@@ -26,7 +26,7 @@ cat /sys/firmware/devicetree/base/model
 ```
 The output will look something like this
 ```
-Raspberry Pi 3 Model B Rev 1.2
+>> Raspberry Pi 3 Model B Rev 1.2
 ```
 Refer to (https://pinout.xyz/) to get the corresponding pin layout.
 
@@ -40,16 +40,17 @@ which will return the hardware model and the current pin states and layout in on
 ### Setup steps after raw image installation
 After a fresh installation make sure to setup the following steps in order to run the library properly
 #### Configuration
-After first boot up do the following Initial configuration of RaspberryPi, i.e. keyboard layout, language support, enable SSH login, etc.
-> sudo raspi-config
-
-Open point (5) Interface Options, and enable the following interfaces
-•	A4 – SSH login
-•	A6 – SPI Bus support
-•	A7 – I2C Bus support
-•	AA – 1-wire support
-Open point (7) Advanced Options, and disable the following interfaces
-•	A8 – Disable login shell over serial
+After first boot up do the following Initial configuration of RaspberryPi
+```
+sudo raspi-config
+```
+Open point 'Interface Options', and enable the following interfaces
+*	SSH login
+* SPI Bus support
+* I2C Bus support
+* 1-wire support
+Open point 'Advanced Options', and disable the following interfaces to ensure RFID-Reader via serial port works later on.
+* Disable login shell over serial
 Additionally, configure network options like WLAN settings, localization options like keyboard layout, timezone, etc. up to your needs.
 Also, it is recommended to change the default password for the user “pi”, as well as the hostname.
 
