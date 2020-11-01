@@ -33,7 +33,9 @@ Refer to (https://pinout.xyz/) to get the corresponding pin layout.
 #### GPIO-Zero
 An direct and easier way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
 and run the command
-> pinout
+```
+pinout
+```
 which will return the hardware model and the current pin states and layout in one step
 <img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
 
@@ -49,8 +51,10 @@ Open point 'Interface Options', and enable the following interfaces
 * SPI Bus support
 * I2C Bus support
 * 1-wire support
+
 Open point 'Advanced Options', and disable the following interfaces to ensure RFID-Reader via serial port works later on.
 * Disable login shell over serial
+
 Additionally, configure network options like WLAN settings, localization options like keyboard layout, timezone, etc. up to your needs.
 Also, it is recommended to change the default password for the user “pi”, as well as the hostname.
 
