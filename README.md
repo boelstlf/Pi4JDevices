@@ -61,12 +61,25 @@ Open point 'Interface Options', and enable the following interfaces
 * SPI Bus support
 * I2C Bus support
 * 1-wire support
+* Enable serial port, BUT disable shell messages over serial
 
 Open point 'Advanced Options', and disable the following interfaces to ensure RFID-Reader via serial port works later on.
 * Disable login shell over serial
 
 Additionally, configure network options like WLAN settings, localization options like keyboard layout, timezone, etc. up to your needs.
 Also, it is recommended to change the default password for the user “pi”, as well as the hostname.
+
+__Enable Serial__
+Open `/boot/cmdline.txt` and ensure that there is no more `ttyAMA0` or `serial0` inside, i.e. should look like
+```
+console=tty1 root=PARTUUID=3c27e499-02 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+```
+
+Second, open `/boot/config.txt` and add following to the end
+```
+dtoverlay=pi3-disable-bt
+enable_uart=1
+```
 
 #### Install required software and libraries
 
