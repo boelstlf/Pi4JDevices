@@ -39,7 +39,11 @@ pinout
 which will return the hardware model and the current pin states and layout in one step
 
 <img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
-
+```
+Maximum Current !
+Raspberry Pi GPIOs shall not exceed 50mA in summary ! 
+Max current of an single GPIO shall not exceed 16mA. Working mode of an single GPIO is between 3..8mA.
+```
 ### Setup steps after raw image installation
 After a fresh installation make sure to setup the following steps in order to run the library properly
 #### Configuration
