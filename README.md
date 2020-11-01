@@ -133,6 +133,10 @@ E.g. using two 10 kOhm resistance.
 Note: As we are reading only, there is no need to connect RX of RFID-Reader to TX of Raspi.
 ```
 
+<img src="./resources/RDM630_pin_layout_table.png" alt="RDM630_pin_layout_table" width="450"/>
+
+more details on https://gist.github.com/andrewvaughan/dc51a0370db1ec159d390c1b3a8b320a
+
 #### RC522
 
 
