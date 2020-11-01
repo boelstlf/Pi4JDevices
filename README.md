@@ -39,11 +39,13 @@ pinout
 which will return the hardware model and the current pin states and layout in one step
 
 <img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
+
 ```
 Maximum Current !
 Raspberry Pi GPIOs shall not exceed 50mA in summary ! 
 Max current of an single GPIO shall not exceed 16mA. Working mode of an single GPIO is between 3..8mA.
 ```
+
 ### Setup steps after raw image installation
 After a fresh installation make sure to setup the following steps in order to run the library properly
 #### Configuration
@@ -91,6 +93,15 @@ sudo pip install paho-mqtt
 ```
 ## Usage
 ### LED
+Good introduction in how to use Raspberry Pi GPIOs, e.g. calculate max. current and resistant for LED usage, please refer to: https://www.elektronik-kompendium.de/sites/raspberry-pi/2102181.htm.
+
+Basic Calculation based on the picture below:
+* GPIO output Uges= 3.3V
+  * GPIO max current 16mA; permanent current better be 3..5 mA
+* RED LED voltage UF= 1.2 V
+  * Resistant voltage Urv = 2.1 V at 4.4mA -> 470 Ohm
+
+<img src="./resources/LED_calc.png" alt="calc LED resistant" width="250"/>
 
 ### Switch
 ### RFID
