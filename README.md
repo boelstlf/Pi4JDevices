@@ -15,3 +15,19 @@ I2C - Devices
   
 UART (serial connection)
   * RFID        (RFID reading based on serial communication)
+  
+  
+#### Pre-Requiste
+##### Determine your RaspberryPi model and Pin layout
+In order to use the correct pin layout and mapping determine the hardware model first.
+Open a terminal on the raspi and enter
+> cat /sys/firmware/devicetree/base/model
+
+The output will look something like this
+> Raspberry Pi 3 Model B Rev 1.2
+
+### Setup steps after raw image
+
+### Pin Layout
+As identified above I am running this code on a Raspi model 3, thus the following pin layout applies
+https://projects.drogon.net/raspberry-pi/wiringpi/pins/
