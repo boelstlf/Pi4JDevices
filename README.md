@@ -115,6 +115,24 @@ sudo java -jar Pi4JDevices.jar LED 1
 ### Switch
 ### RFID
 #### RDM630
+```
+Raspberry Pi is not TTL save !
+Raspberry Pi GPIOs are running on 3.3V. 
+This means using any circuit running on TTL-Level (5V) you have to level the voltage (voltage divider). E.g. using two 10 kOhm resistance. 
+Connect the RFID reader to RaspberryPi.
+```
+| PIN RFID Module  | PIN Raspi |
+| ------------- | ------------- |
+| GND  | 6 (GND)  |
+| Vcc  | 2 (5V)  |
+| TX   | 10 (RX) -> voltage divider !|
+
+<img src="./resources/RFID_wiring.png" alt="wiring RFID" width="350"/>
+
+```
+Note: As we are reading only, there is no need to connect RX of RFID-Reader to TX of Raspi.
+```
+
 #### RC522
 
 
