@@ -29,14 +29,16 @@ Open a terminal on the raspi and enter
 The output will look something like this
 > Raspberry Pi 3 Model B Rev 1.2
 
-An easire way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
-and to run the command
+## #Pin Layout
+As identified above I am running this code on a Raspi model 3, thus the following pin layout applies.
+
+
+An easier way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
+and run the command
 > pinout
-which will return hardware model and the current pin states and layout at one
-(resources/pinlayout_sample.png)
+which will return the hardware model and the current pin states and layout in one step
+<img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
 
 ## Setup steps after raw image
 
-## Pin Layout
-As identified above I am running this code on a Raspi model 3, thus the following pin layout applies.
-https://projects.drogon.net/raspberry-pi/wiringpi/pins/
+
