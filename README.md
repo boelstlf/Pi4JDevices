@@ -53,6 +53,9 @@ After first boot up do the following Initial configuration of RaspberryPi
 ```
 sudo raspi-config
 ```
+
+<img src="./resources/raspi-config_menu.png" alt="raspi-config menu" width="250"/>
+
 Open point 'Interface Options', and enable the following interfaces
 *	SSH login
 * SPI Bus support
@@ -102,6 +105,12 @@ Basic Calculation based on the picture below:
   * Resistant voltage Urv = 2.1 V at 4.4mA -> 470 Ohm
 
 <img src="./resources/LED_calc.png" alt="calc LED resistant" width="250"/>
+
+The following picture shows how to wire the three LEDs to run the LED-test of the library
+```
+sudo java -jar Pi4JDevices.jar LED 1
+```
+<img src="./resources/fritzing_LED.png" alt="fritzing LED" width="250"/>
 
 ### Switch
 ### RFID
