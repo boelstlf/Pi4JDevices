@@ -17,7 +17,7 @@ Following devices (sensors & actors) are included currently
   * Turn on/off LED (pin-number)
   * Switch      (input pin-number)
   
-### Pre-Requiste
+### Pin Layout
 #### Determine your RaspberryPi model and Pin layout
 In order to use the correct pin layout and mapping determine the hardware model first.
 Open a terminal on the raspi and enter
@@ -28,13 +28,55 @@ The output will look something like this
 
 Refer to (https://pinout.xyz/) to get the corresponding pin layout.
 
-### Pin Layout
-An direct way way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
+#### GPIO-Zero
+An direct and easier way is to install the support library [GPIO-Zero](https://gpiozero.readthedocs.io/en/stable/installing.html)
 and run the command
 > pinout
 which will return the hardware model and the current pin states and layout in one step
 <img src="./resources/pinlayout_sample.png" alt="gpiozero pin layout result" width="250"/>
 
-## Setup steps after raw image
+### Setup steps after raw image installation
+After a fresh installation make sure to setup the following steps in order to run the library properly
+#### Configuration
+After first boot up do the following Initial configuration of RaspberryPi, i.e. keyboard layout, language support, enable SSH login, etc.
+> sudo raspi-config
+
+Open point (5) Interface Options, and enable the following interfaces
+•	A4 – SSH login
+•	A6 – SPI Bus support
+•	A7 – I2C Bus support
+•	AA – 1-wire support
+Open point (7) Advanced Options, and disable the following interfaces
+•	A8 – Disable login shell over serial
+Additionally, configure network options like WLAN settings, localization options like keyboard layout, timezone, etc. up to your needs.
+Also, it is recommended to change the default password for the user “pi”, as well as the hostname.
+
+#### Install required software and libraries
+
+__Install Java__
+> sudo apt-get install openjdk-11-jdk
+
+__WiringPi__
+> sudo apt-get install wiringpi
+
+__Python package Manager__
+> sudo apt-get install python-pip
+
+__Python package for “Serial” installieren__
+>sudo pip install pyserial
+
+__MQTT Client__
+> sudo apt-get install -y mosquitto mosquitto-clients
+
+__MQTT Python libraries__
+> sudo pip install paho-mqtt
+
+## Usage
+### LED
+
+### Switch
+### RFID
+#### RDM630
+#### RC522
 
 
