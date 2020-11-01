@@ -39,7 +39,7 @@ public class Switch {
 		// create gpio instance
 		gpio = GpioFactory.getInstance();
 
-		// provision GPIO pin as an input pin with its internal pull down
+		// provision GPIO pin as an input pin with its internal pull up
 		// resistor enabled
 		final GpioPinDigitalInput materialTrigger = gpio
 				.provisionDigitalInputPin(materialTriggerPin,
