@@ -21,11 +21,13 @@ Following devices (sensors & actors) are included currently
 #### Determine your RaspberryPi model and Pin layout
 In order to use the correct pin layout and mapping determine the hardware model first.
 Open a terminal on the raspi and enter
-> cat /sys/firmware/devicetree/base/model
-
+```
+cat /sys/firmware/devicetree/base/model
+```
 The output will look something like this
-> Raspberry Pi 3 Model B Rev 1.2
-
+```
+Raspberry Pi 3 Model B Rev 1.2
+```
 Refer to (https://pinout.xyz/) to get the corresponding pin layout.
 
 #### GPIO-Zero
