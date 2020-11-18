@@ -47,7 +47,7 @@ Max current of an single GPIO shall not exceed 16mA. Working mode of an single G
 ```
 
 ### Setup steps after raw image installation
-After a fresh installation make sure to setup the following steps in order to run the library properly
+After a fresh installation from https://www.raspberrypi.org/ make sure to run the following steps in order to run the library properly
 #### Configuration
 After first boot up do the following Initial configuration of RaspberryPi
 ```
